@@ -2,11 +2,11 @@
 
 # docsify <small>4.11.6</small>
 
-> A magical documentation site generator.
+> docsify 是一个神奇的站点生成器
 
-- Simple and lightweight
-- No statically built html files
-- Multiple themes
+- 简单轻量
+- 非静态的 html 文件
+- 多主题
 
 [GitHub](https://github.com/docsifyjs/docsify/)
 [Getting Started](#docsify)

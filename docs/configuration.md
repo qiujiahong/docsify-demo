@@ -1,6 +1,6 @@
-# Configuration
+# 配置项
 
-You can configure Docsify by defining `window.$docsify` as an object:
+你可以配置在 `window.$docsify` 里。
 
 ```html
 <script>
@@ -12,30 +12,12 @@ You can configure Docsify by defining `window.$docsify` as an object:
 </script>
 ```
 
-The config can also be defined as a function, in which case the first argument is the Docsify `vm` instance. The function should return a config object. This can be useful for referencing `vm` in places like the markdown configuration:
-
-```html
-<script>
-  window.$docsify = function(vm) {
-    return {
-      markdown: {
-        renderer: {
-          code(code, lang) {
-            // ... use `vm` ...
-          },
-        },
-      },
-    };
-  };
-</script>
-```
-
 ## el
 
-- Type: `String`
-- Default: `#app`
+- 类型：`String`
+- 默认值：`#app`
 
-The DOM element to be mounted on initialization. It can be a CSS selector string or an actual [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement).
+docsify 初始化的挂载元素，可以是一个 CSS 选择器，默认为 `#app` 如果不存在就直接绑定在 `body` 上。
 
 ```js
 window.$docsify = {
@@ -45,10 +27,10 @@ window.$docsify = {
 
 ## repo
 
-- Type: `String`
-- Default: `null`
+- 类型：`String`
+- 默认值: `null`
 
-Configure the repository url, or a string of `username/repo` can add the [GitHub Corner](http://tholman.com/github-corners/) widget in the top right corner of the site.
+配置仓库地址或者 `username/repo` 的字符串，会在页面右上角渲染一个 [GitHub Corner](http://tholman.com/github-corners/) 挂件。
 
 ```js
 window.$docsify = {
@@ -60,10 +42,10 @@ window.$docsify = {
 
 ## maxLevel
 
-- Type: `Number`
-- Default: `6`
+- 类型：`Number`
+- 默认值: `6`
 
-Maximum Table of content level.
+默认情况下会抓取文档中所有标题渲染成目录，可配置最大支持渲染的标题层级。
 
 ```js
 window.$docsify = {
@@ -73,44 +55,44 @@ window.$docsify = {
 
 ## loadNavbar
 
-- Type: `Boolean|String`
-- Default: `false`
+- 类型：`Boolean|String`
+- 默认值: `false`
 
-Loads navbar from the Markdown file `_navbar.md` if **true**, else loads it from the path specified.
+加载自定义导航栏，参考[定制导航栏](zh-cn/custom-navbar.md) 了解用法。设置为 `true` 后会加载 `_navbar.md` 文件，也可以自定义加载的文件名。
 
 ```js
 window.$docsify = {
-  // load from _navbar.md
+  // 加载 _navbar.md
   loadNavbar: true,
 
-  // load from nav.md
+  // 加载 nav.md
   loadNavbar: 'nav.md',
 };
 ```
 
 ## loadSidebar
 
-- Type: `Boolean|String`
-- Default: `false`
+- 类型：`Boolean|String`
+- 默认值: `false`
 
-Loads sidebar from the Markdown file `_sidebar.md` if **true**, else loads it from the path specified.
+加载自定义侧边栏，参考[多页文档](zh-cn/more-pages.md)。设置为 `true` 后会加载 `_sidebar.md` 文件，也可以自定义加载的文件名。
 
 ```js
 window.$docsify = {
-  // load from _sidebar.md
+  // 加载 _sidebar.md
   loadSidebar: true,
 
-  // load from summary.md
+  // 加载 summary.md
   loadSidebar: 'summary.md',
 };
 ```
 
 ## hideSidebar
 
-- Type : `Boolean`
-- Default: `true`
+- 类型 : `Boolean`
+- 默认值: `true`
 
-This option will completely hide your sidebar and won't render any content on the side.
+这个选项用来完全隐藏侧边栏，侧边栏的任何内容都不会被渲染。
 
 ```js
 window.$docsify = {
@@ -120,10 +102,10 @@ window.$docsify = {
 
 ## subMaxLevel
 
-- Type: `Number`
-- Default: `0`
+- 类型：`Number`
+- 默认值: `0`
 
-Add table of contents (TOC) in custom sidebar.
+自定义侧边栏后默认不会再生成目录，你也可以通过设置生成目录的最大层级开启这个功能。
 
 ```js
 window.$docsify = {
@@ -133,10 +115,10 @@ window.$docsify = {
 
 ## auto2top
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值: `false`
 
-Scrolls to the top of the screen when the route is changed.
+切换页面后是否自动跳转到页面顶部。
 
 ```js
 window.$docsify = {
@@ -146,46 +128,36 @@ window.$docsify = {
 
 ## homepage
 
-- Type: `String`
-- Default: `README.md`
+- 类型：`String`
+- 默认值: `README.md`
 
-`README.md` in your docs folder will be treated as the homepage for your website, but sometimes you may need to serve another file as your homepage.
+设置首页文件加载路径。适合不想将 `README.md` 作为入口文件渲染，或者是文档存放在其他位置的情况使用。
 
 ```js
 window.$docsify = {
-  // Change to /home.md
+  // 入口文件改为 /home.md
   homepage: 'home.md',
 
-  // Or use the readme in your repo
+  // 文档和仓库根目录下的 README.md 内容一致
   homepage:
     'https://raw.githubusercontent.com/docsifyjs/docsify/master/README.md',
 };
 ```
 
-If you have a link to the homepage in the sidebar and want it to be shown as active when accessing the root url, make sure to update your sidebar accordingly:
-
-```markdown
-- Sidebar
-  - [Home](/)
-  - [Another page](another.md)
-```
-
-For more details, see [#1131](https://github.com/docsifyjs/docsify/issues/1131).
-
 ## basePath
 
-- Type: `String`
+- 类型：`String`
 
-Base path of the website. You can set it to another directory or another domain name.
+文档加载的根路径，可以是二级路径或者是其他域名的路径。
 
 ```js
 window.$docsify = {
   basePath: '/path/',
 
-  // Load the files from another site
+  // 直接渲染其他域名的文档
   basePath: 'https://docsify.js.org/',
 
-  // Even can load files from other repo
+  // 甚至直接渲染其他仓库
   basePath:
     'https://raw.githubusercontent.com/ryanmcdermott/clean-code-javascript/master/',
 };
@@ -193,12 +165,12 @@ window.$docsify = {
 
 ## relativePath
 
-- Type: `Boolean`
-- Default: `false`
+- 类型: `Boolean`
+- 默认值: `false`
 
-If **true**, links are relative to the current context.
+如果该选项设为 **true** ，那么链接会使用相对路径。
 
-For example, the directory structure is as follows:
+例如，像这样的目录结构：
 
 ```text
 .
@@ -212,7 +184,7 @@ For example, the directory structure is as follows:
             └── example.md
 ```
 
-With relative path **enabled** and current URL `http://domain.com/zh-cn/README`, given links will resolve to:
+如果 **启用** 了相对路径，当前链接是 `http://domain.com/zh-cn/README` ，对应的链接会解析为：
 
 ```text
 guide.md              => http://domain.com/zh-cn/guide
@@ -223,32 +195,32 @@ config/example.md     => http://domain.com/zh-cn/config/example
 
 ```js
 window.$docsify = {
-  // Relative path enabled
+  // 启用相对路径
   relativePath: true,
 
-  // Relative path disabled (default value)
+  // 禁用相对路径（默认值）
   relativePath: false,
 };
 ```
 
 ## coverpage
 
-- Type: `Boolean|String|String[]|Object`
-- Default: `false`
+- 类型：`Boolean|String`
+- 默认值: `false`
 
-Activate the [cover feature](cover.md). If true, it will load from `_coverpage.md`.
+启用[封面页](zh-cn/cover.md)。开启后是加载 `_coverpage.md` 文件，也可以自定义文件名。
 
 ```js
 window.$docsify = {
   coverpage: true,
 
-  // Custom file name
+  // 自定义文件名
   coverpage: 'cover.md',
 
-  // multiple covers
+  // 多个封面页
   coverpage: ['/', '/zh-cn/'],
 
-  // multiple covers and custom file name
+  // 多个封面页，并指定文件名
   coverpage: {
     '/': 'cover.md',
     '/zh-cn/': 'cover.md',
@@ -258,9 +230,9 @@ window.$docsify = {
 
 ## logo
 
-- Type: `String`
+- 类型: `String`
 
-Website logo as it appears in the sidebar. You can resize it by using CSS.
+在侧边栏中出现的网站图标，你可以使用`CSS`来更改大小
 
 ```js
 window.$docsify = {
@@ -270,9 +242,9 @@ window.$docsify = {
 
 ## name
 
-- Type: `String`
+- 类型：`String`
 
-Website name as it appears in the sidebar.
+文档标题，会显示在侧边栏顶部。
 
 ```js
 window.$docsify = {
@@ -280,7 +252,7 @@ window.$docsify = {
 };
 ```
 
-The name field can also contain custom HTML for easier customization:
+name 项也可以包含自定义 HTML 代码来方便地定制。
 
 ```js
 window.$docsify = {
@@ -290,16 +262,16 @@ window.$docsify = {
 
 ## nameLink
 
-- Type: `String`
-- Default: `window.location.pathname`
+- 类型：`String`
+- 默认值：`window.location.pathname`
 
-The URL that the website `name` links to.
+点击文档标题后跳转的链接地址。
 
 ```js
 window.$docsify = {
   nameLink: '/',
 
-  // For each route
+  // 按照路由切换
   nameLink: {
     '/zh-cn/': '/zh-cn/',
     '/': '/',
@@ -309,9 +281,9 @@ window.$docsify = {
 
 ## markdown
 
-- Type: `Function`
+- 类型: `Object|Function`
 
-See [Markdown configuration](markdown.md).
+参考 [Markdown 配置](zh-cn/markdown.md)。
 
 ```js
 window.$docsify = {
@@ -335,21 +307,21 @@ window.$docsify = {
 
 ## themeColor
 
-- Type: `String`
+- 类型：`String`
 
-Customize the theme color. Use [CSS3 variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) feature and polyfill in old browser.
+替换主题色。利用 [CSS3 支持变量](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables)的特性，对于老的浏览器有 polyfill 处理。
 
 ```js
 window.$docsify = {
-  themeColor: '#3F51B5',
+  themeColor: '#3F51B5'
 };
 ```
 
 ## alias
 
-- Type: `Object`
+- 类型：`Object`
 
-Set the route alias. You can freely manage routing rules. Supports RegExp.
+定义路由别名，可以更自由的定义路由规则。 支持正则。
 
 ```js
 window.$docsify = {
@@ -365,9 +337,9 @@ window.$docsify = {
 
 ## autoHeader
 
-- type: `Boolean`
+- 类型：`Boolean`
 
-If `loadSidebar` and `autoHeader` are both enabled, for each link in `_sidebar.md`, prepend a header to the page before converting it to HTML. Compare [#78](https://github.com/docsifyjs/docsify/issues/78).
+同时设置 `loadSidebar` 和 `autoHeader` 后，可以根据 `_sidebar.md` 的内容自动为每个页面增加标题。[#78](https://github.com/docsifyjs/docsify/issues/78)
 
 ```js
 window.$docsify = {
@@ -378,9 +350,9 @@ window.$docsify = {
 
 ## executeScript
 
-- type: `Boolean`
+- 类型：`Boolean`
 
-Execute the script on the page. Only parse the first script tag([demo](themes)). If Vue is present, it is turned on by default.
+执行文档里的 script 标签里的脚本，只执行第一个 script ([demo](zh-cn/themes.md))。 如果 Vue 存在，则自动开启。
 
 ```js
 window.$docsify = {
@@ -396,13 +368,13 @@ window.$docsify = {
 </script>
 ```
 
-Note that if you are running an external script, e.g. an embedded jsfiddle demo, make sure to include the [external-script](plugins.md?id=external-script) plugin.
+注意如果执行的是一个外链脚本，比如 jsfiddle 的内嵌 demo，请确保引入 [external-script](plugins.md?id=外链脚本-external-script) 插件。
 
 ## noEmoji
 
-- type: `Boolean`
+- 类型: `Boolean`
 
-Disabled emoji parse.
+禁用 emoji 解析。
 
 ```js
 window.$docsify = {
@@ -410,13 +382,13 @@ window.$docsify = {
 };
 ```
 
-?> If this options is `false` but you don't want to emojify some specific colons , [Refer this](https://github.com/docsifyjs/docsify/issues/742#issuecomment-586313143)
+?> 如果该选项设为 `false` ，但是你不想解析一些特别的表情符，[参考这里](https://github.com/docsifyjs/docsify/issues/742#issuecomment-586313143)
 
 ## mergeNavbar
 
-- type: `Boolean`
+- 类型: `Boolean`
 
-Navbar will be merged with the sidebar on smaller screens.
+小屏设备下合并导航栏到侧边栏。
 
 ```js
 window.$docsify = {
@@ -426,10 +398,9 @@ window.$docsify = {
 
 ## formatUpdated
 
-- type: `String|Function`
+- 类型: `String|Function`
 
-We can display the file update date through **{docsify-updated<span>}</span>** variable. And format it by `formatUpdated`.
-See https://github.com/lukeed/tinydate#patterns
+我们可以通过 **{docsify-updated<span>}</span>** 变量显示文档更新日期. 并且通过 `formatUpdated`配置日期格式。参考 [https://github.com/lukeed/tinydate#patterns](https://github.com/lukeed/tinydate#patterns)
 
 ```js
 window.$docsify = {
@@ -445,10 +416,10 @@ window.$docsify = {
 
 ## externalLinkTarget
 
-- type: `String`
-- default: `_blank`
+- 类型: `String`
+- 默认: `_blank`
 
-Target to open external links inside the markdown. Default `'_blank'` (new window/tab)
+外部链接的打开方式。默认为 `_blank` （在新窗口或者标签页中打开）
 
 ```js
 window.$docsify = {
@@ -458,10 +429,10 @@ window.$docsify = {
 
 ## cornerExternalLinkTarget
 
-- type:`String`
-- default:`_blank`
+- 类型:`String`
+- 默认值:`_blank`
 
-Target to open external link at the top right corner. Default `'_blank'` (new window/tab)
+右上角链接的打开方式。默认为 `_blank` （在新窗口或者标签页中打开）
 
 ```js
 window.$docsify = {
@@ -471,10 +442,10 @@ window.$docsify = {
 
 ## externalLinkRel
 
-- type: `String`
-- default: `noopener`
+- 类型: `String`
+- 默认值: `noopener`
 
-Default `'noopener'` (no opener) prevents the newly opened external page (when [externalLinkTarget](#externallinktarget) is `'_blank'`) from having the ability to control our page. No `rel` is set when it's not `'_blank'`. See [this post](https://mathiasbynens.github.io/rel-noopener/) for more information about why you may want to use this option.
+默认为 `noopener` (no opener) 可以防止新打开的外部页面（当 [externalLinkTarget](#externallinktarget) 设为 `_blank` 时）能够控制我们的页面，没有设为 `_blank` 的话就不需要设置这个选项了。
 
 ```js
 window.$docsify = {
@@ -484,8 +455,8 @@ window.$docsify = {
 
 ## routerMode
 
-- type: `String`
-- default: `hash`
+- 类型: `String`
+- 默认: `hash`
 
 ```js
 window.$docsify = {
@@ -493,24 +464,11 @@ window.$docsify = {
 };
 ```
 
-## crossOriginLinks
-
-- type: `Array`
-
-When `routerMode: 'history'`, you may face the cross-origin issues, See [#1379](https://github.com/docsifyjs/docsify/issues/1379).
-In Markdown content, there is a simple way to solve it, see extends Markdown syntax `Cross-Origin link` in [helpers](helpers.md).
-
-```js
-window.$docsify = {
-  crossOriginLinks: ['https://example.com/cross-origin-link'],
-};
-```
-
 ## noCompileLinks
 
-- type: `Array`
+- 类型: `Array`
 
-Sometimes we do not want docsify to handle our links. See [#203](https://github.com/docsifyjs/docsify/issues/203)
+有时我们不希望 docsify 处理我们的链接。 参考 [#203](https://github.com/docsifyjs/docsify/issues/203)
 
 ```js
 window.$docsify = {
@@ -520,9 +478,9 @@ window.$docsify = {
 
 ## onlyCover
 
-- type: `Boolean`
+- 类型: `Boolean`
 
-Only coverpage is loaded when visiting the home page.
+只在访问主页时加载封面。
 
 ```js
 window.$docsify = {
@@ -532,9 +490,9 @@ window.$docsify = {
 
 ## requestHeaders
 
-- type: `Object`
+- 类型: `Object`
 
-Set the request resource headers.
+设置请求资源的请求头。
 
 ```js
 window.$docsify = {
@@ -544,7 +502,7 @@ window.$docsify = {
 };
 ```
 
-Such as setting the cache
+例如设置缓存
 
 ```js
 window.$docsify = {
@@ -556,9 +514,9 @@ window.$docsify = {
 
 ## ext
 
-- type: `String`
+- 类型: `String`
 
-Request file extension.
+资源的文件扩展名。
 
 ```js
 window.$docsify = {
@@ -568,15 +526,15 @@ window.$docsify = {
 
 ## fallbackLanguages
 
-- type: `Array<string>`
+- 类型: `Array<string>`
 
-List of languages that will fallback to the default language when a page is requested and it doesn't exist for the given local.
+一个语言列表。在浏览这个列表中的语言的翻译文档时都会在请求到一个对应语言的翻译文档，不存在时显示默认语言的同名文档
 
 Example:
 
-- try to fetch the page of `/de/overview`. If this page exists, it'll be displayed.
-- then try to fetch the default page `/overview` (depending on the default language). If this page exists, it'll be displayed.
-- then display the 404 page.
+- 尝试访问`/de/overview`，如果存在则显示
+- 如果不存在则尝试`/overview`（取决于默认语言），如果存在即显示 
+- 如果也不存在，显示404页面
 
 ```js
 window.$docsify = {
@@ -586,9 +544,9 @@ window.$docsify = {
 
 ## notFoundPage
 
-- type: `Boolean` | `String` | `Object`
+- 类型: `Boolean` | `String` | `Object`
 
-Load the `_404.md` file:
+在找不到指定页面时加载`_404.md`:
 
 ```js
 window.$docsify = {
@@ -596,7 +554,7 @@ window.$docsify = {
 };
 ```
 
-Load the customized path of the 404 page:
+加载自定义404页面:
 
 ```js
 window.$docsify = {
@@ -604,7 +562,7 @@ window.$docsify = {
 };
 ```
 
-Load the right 404 page according to the localization:
+加载正确的本地化过的404页面:
 
 ```js
 window.$docsify = {
@@ -615,118 +573,17 @@ window.$docsify = {
 };
 ```
 
-> Note: The options with fallbackLanguages didn't work with the `notFoundPage` options.
+> 注意: 配置过`fallbackLanguages`这个选项的页面与这个选项`notFoundPage`冲突。
 
 ## topMargin
 
-- type: `Number`
-- default: `0`
+- 类型: `Number`
+- 默认值: `0`
 
-Adds a space on top when scrolling content page to reach the selected section. This is useful in case you have a _sticky-header_ layout and you want to align anchors to the end of your header.
+让你的内容页在滚动到指定的锚点时，距离页面顶部有一定空间。当你使用 `固定页头` 布局时这个选项很有用，可以让你的锚点对齐标题栏。
 
 ```js
 window.$docsify = {
   topMargin: 90, // default: 0
 };
 ```
-
-## vueComponents
-
-- type: `Object`
-
-Creates and registers global [Vue components](https://vuejs.org/v2/guide/components.html). Components are specified using the component name as the key with an object containing Vue options as the value. Component `data` is unique for each instance and will not persist as users navigate the site.
-
-```js
-window.$docsify = {
-  vueComponents: {
-    'button-counter': {
-      template: `
-        <button @click="count += 1">
-          You clicked me {{ count }} times
-        </button>
-      `,
-      data() {
-        return {
-          count: 0,
-        };
-      },
-    },
-  },
-};
-```
-
-```markdown
-<button-counter></button-counter>
-```
-
-<output data-lang="output">
-  <button-counter></button-counter>
-</output>
-
-## vueGlobalOptions
-
-- type: `Object`
-
-Specifies [Vue options](https://vuejs.org/v2/api/#Options-Data) for use with Vue content not explicitly mounted with [vueMounts](#mounting-dom-elements), [vueComponents](#components), or a [markdown script](#markdown-script). Changes to global `data` will persist and be reflected anywhere global references are used.
-
-```js
-window.$docsify = {
-  vueGlobalOptions: {
-    data() {
-      return {
-        count: 0,
-      };
-    },
-  },
-};
-```
-
-```markdown
-<p>
-  <button @click="count -= 1">-</button>
-  {{ count }}
-  <button @click="count += 1">+</button>
-</p>
-```
-
-<output data-lang="output">
-  <p>
-    <button @click="count -= 1">-</button>
-    {{ count }}
-    <button @click="count += 1">+</button>
-  </p>
-</output>
-
-## vueMounts
-
-- type: `Object`
-
-Specifies DOM elements to mount as [Vue instances](https://vuejs.org/v2/guide/instance.html) and their associated options. Mount elements are specified using a [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) as the key with an object containing Vue options as their value. Docsify will mount the first matching element in the main content area each time a new page is loaded. Mount element `data` is unique for each instance and will not persist as users navigate the site.
-
-```js
-window.$docsify = {
-  vueMounts: {
-    '#counter': {
-      data() {
-        return {
-          count: 0,
-        };
-      },
-    },
-  },
-};
-```
-
-```markdown
-<div id="counter">
-  <button @click="count -= 1">-</button>
-  {{ count }}
-  <button @click="count += 1">+</button>
-</div>
-```
-
-<output id="counter">
-  <button @click="count -= 1">-</button>
-  {{ count }}
-  <button @click="count += 1">+</button>
-</output>

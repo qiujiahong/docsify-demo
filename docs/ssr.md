@@ -1,22 +1,27 @@
-# Server-Side Rendering
+# 服务端渲染（SSR）
 
-See https://docsify.now.sh
+先看例子 https://docsify.now.sh
 
-Repo in https://github.com/docsifyjs/docsify-ssr-demo
+项目地址在 https://github.com/docsifyjs/docsify-ssr-demo
 
-## Why SSR?
-- Better SEO
-- Feeling cool
+![](https://dn-mhke0kuv.qbox.me/2bfef08c592706108055.png)
 
-## Quick start
+文档依旧是部署在 GitHub Pages 上，Node 服务部署在 now.sh 里，渲染的内容是从 GitHub Pages 上同步过来的。所以静态部署文档的服务器和服务端渲染的 Node 服务器是分开的，也就是说你还是可以用之前的方式更新文档，并不需要每次都部署。
 
-Install `now` and `docsify-cli` in your project.
+## 什么是 SSR?
+- 更好的 SEO
+- 更酷的感觉
+
+
+## 快速开始
+
+如果你熟悉 `now` 的使用，接下来的介绍就很简单了。先创建一个新项目，并安装 `now` 和 `docsify-cli`。
 
 ```bash
 npm i now docsify-cli -D
 ```
 
-Edit `package.json`. If the documentation in `./docs` subdirectory.
+编辑 `package.json`。假设你的文档放在 `./docs` 子目录。
 
 ```json
 {
@@ -40,9 +45,9 @@ Edit `package.json`. If the documentation in `./docs` subdirectory.
 }
 ```
 
-!> The `basePath` just like webpack `publicPath`. We can use local or remote files.
+!> 其中 `basePath` 相当于 webpack 的 `publicPath` ，为文档所在的路径，可以填你的 docsify 文档网站。我们可以使用本地或者远程文件。
 
-We can preview in the local to see if it works.
+配置好了以后，我们可以在本地预览。
 
 ```bash
 npm start
@@ -50,17 +55,17 @@ npm start
 # open http://localhost:4000
 ```
 
-Publish it!
+发布！
 
 ```bash
 now -p
 ```
 
-Now, You have a support for SSR the docs site.
+现在，你有一个支持服务端渲染的文档网站了。
 
-## Custom template
+## 定制模板
 
-You can provide a template for entire page's HTML. such as
+你可以提供一个整页模板，例如：
 
 ```html
 <!DOCTYPE html>
@@ -68,7 +73,7 @@ You can provide a template for entire page's HTML. such as
 <head>
   <meta charset="UTF-8">
   <title>docsify</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css" title="vue">
 </head>
 <body>
@@ -83,27 +88,36 @@ You can provide a template for entire page's HTML. such as
 </html>
 ```
 
-The template should contain these comments for rendered app content.
+模板可以包含占位符，会自动将渲染后的 html 和配置内容注入到页面上。
+
  - `<!--inject-app-->`
  - `<!--inject-config-->`
 
-## Configuration
 
-You can configure it in a special config file, or `package.json`.
+## 配置
+
+配置可以单独写在配置文件内，然后通过 `--config config.js` 加载，或者写在 `package.json` 中。
+
+渲染的基础模版也可以自定义，配置在 `template` 属性上。
 
 ```js
 module.exports = {
   template: './ssr.html',
-  maxAge: 60 * 60 * 1000, // lru-cache config
+  maxAge: 60 * 60 * 1000, // lru-cache 设置
   config: {
-   // docsify config
+   // docsify 设置
   }
 }
 ```
 
-## Deploy for your VPS
 
-You can run `docsify start` directly on your Node server, or write your own server app with `docsify-server-renderer`.
+
+
+## 更多玩法
+
+你可以直接在你的 Node 服务器上执行 `docsify start` 。
+
+`docsify start` 其实是依赖了 [`docsify-server-renderer`](https://npmarket.surge.sh/?name=docsify-server-renderer) 模块，如果你感兴趣，你完全可以用它自己实现一个 server，可以加入缓存等功能。
 
 ```js
 var Renderer = require('docsify-server-renderer')
@@ -122,3 +136,5 @@ renderer.renderToString(url)
   .then(html => {})
   .catch(err => {})
 ```
+
+当然文档文件和 server 也是可以部署在一起的，`basePath` 不是一个 URL 的话就会当做文件路径处理，也就是从服务器上加载资源。

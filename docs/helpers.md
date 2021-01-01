@@ -1,50 +1,44 @@
-# Doc helper
+# 文档助手
 
-docsify extends Markdown syntax to make your documents more readable.
+docsify 扩展了一些 Markdown 语法，可以让文档更易读。
 
-> Note: For the special code syntax cases, you'd better put them within a code backticks to avoid any conflicting from configurations or emojis.
+## 强调内容
 
-## Important content
-
-Important content like:
+适合显示重要的提示信息，语法为 `!> 内容`。
 
 ```markdown
-!> **Time** is money, my friend!
+!> 一段重要的内容，可以和其他 **Markdown** 语法混用。
 ```
 
-is rendered as:
+!> 一段重要的内容，可以和其他 **Markdown** 语法混用。
 
-!> **Time** is money, my friend!
+## 普通提示
 
-## General tips
-
-General tips like:
+普通的提示信息，比如写 TODO 或者参考内容等。
 
 ```markdown
-?> _TODO_ unit test
+?> _TODO_ 完善示例
 ```
 
-are rendered as:
+?> _TODO_ 完善示例
 
-?> _TODO_ unit test
+## 忽略编译链接
 
-## Ignore to compile link
-
-Some time we will put some other relative path to the link, you have to need to tell docsify you don't need to compile this link. For example
+有时候我们会把其他一些相对路径放到链接上，你必须告诉 docsify 你不需要编译这个链接。 例如：
 
 ```md
 [link](/demo/)
 ```
 
-It will be compiled to `<a href="/#/demo/">link</a>` and will be loaded `/demo/README.md`. Maybe you want to jump to `/demo/index.html`.
+它将被编译为 `<a href="/#/demo/">link</a>` 并将加载 `/demo/README.md`. 可能你想跳转到 `/demo/index.html`。
 
-Now you can do that
+现在你可以做到这一点
 
 ```md
 [link](/demo/ ':ignore')
 ```
 
-You will get `<a href="/demo/">link</a>`html. Do not worry, you can still set title for link.
+即将会得到 `<a href="/demo/">link</a>` html 代码。不要担心，你仍然可以为链接设置标题。
 
 ```md
 [link](/demo/ ':ignore title')
@@ -52,28 +46,28 @@ You will get `<a href="/demo/">link</a>`html. Do not worry, you can still set ti
 <a href="/demo/" title="title">link</a>
 ```
 
-## Set target attribute for link
+## 设置链接的 target 属性
 
 ```md
 [link](/demo ':target=_blank')
 [link](/demo2 ':target=_self')
 ```
 
-## Disable link
+## 禁用链接
 
 ```md
 [link](/demo ':disabled')
 ```
 
-## Cross-Origin link
+## 跨域链接
 
-Only when you both set the `routerMode: 'history'` and `externalLinkTarget: '_self'`, you need add this configuration for those Cross-Origin links.
+只有当你同时设置了 `routerMode: 'history'` 和 `externalLinkTarget: '_self'` 时，你需要为这些跨域链接添加这个配置。
 
 ```md
 [example.com](https://example.com/ ':crossorgin')
 ```
 
-## Github Task Lists
+## Github 任务列表
 
 ```md
 - [ ] foo
@@ -91,16 +85,16 @@ Only when you both set the `routerMode: 'history'` and `externalLinkTarget: '_se
   - [ ] bim
   - [ ] lim
 
-## Image
+## 图片处理
 
-### Resizing
+### 缩放
 
 ```md
 ![logo](https://docsify.js.org/_media/icon.svg ':size=WIDTHxHEIGHT')
 ![logo](https://docsify.js.org/_media/icon.svg ':size=50x100')
 ![logo](https://docsify.js.org/_media/icon.svg ':size=100')
 
-<!-- Support percentage -->
+<!-- 支持按百分比缩放 -->
 
 ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
 ```
@@ -109,32 +103,32 @@ Only when you both set the `routerMode: 'history'` and `externalLinkTarget: '_se
 ![logo](https://docsify.js.org/_media/icon.svg ':size=100')
 ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
 
-### Customise class
+### 设置图片的 Class
 
 ```md
 ![logo](https://docsify.js.org/_media/icon.svg ':class=someCssClass')
 ```
 
-### Customise ID
+### 设置图片的 ID
 
 ```md
 ![logo](https://docsify.js.org/_media/icon.svg ':id=someCssId')
 ```
 
-## Customise ID for headings
+## 设置标题的 id 属性
 
 ```md
-### Hello, world! :id=hello-world
+### 你好，世界！ :id=hello-world
 ```
 
-## Markdown in html tag
+## html 标签中的 Markdown
 
-You need to insert a space between the html and markdown content.
-This is useful for rendering markdown content in the details element.
+你需要在 html 和 Markdown 内容中插入空行。
+当你需要在 details 元素中渲染 Markdown 时很有用。
 
 ```markdown
 <details>
-<summary>Self-assessment (Click to expand)</summary>
+<summary>自我评价（点击展开）</summary>
 
 - Abc
 - Abc
@@ -143,14 +137,14 @@ This is useful for rendering markdown content in the details element.
 ```
 
 <details>
-<summary>Self-assessment (Click to expand)</summary>
+<summary>自我评价（点击展开）</summary>
 
 - Abc
 - Abc
 
 </details>
 
-Or markdown content can be wrapped in html tag.
+Markdown 内容也可以被 html 标签包裹。
 
 ```markdown
 <div style='color: red'>

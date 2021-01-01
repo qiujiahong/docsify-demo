@@ -1,15 +1,16 @@
-# Themes
+# 主题
 
-There is a handful of themes available, both official and community-made. Copy [Vue](//vuejs.org) and [buble](//buble.surge.sh) website custom theme and [@liril-net](https://github.com/liril-net) contribution to the theme of the black style.
+目前提供三套主题可供选择，模仿 [Vue](//vuejs.org) 和 [buble](//buble.surge.sh) 官网订制的主题样式。还有 [@liril-net](https://github.com/liril-net) 贡献的黑色风格的主题。
 
 ```html
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/buble.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/dark.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/pure.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/dolphin.css">
 ```
 
-!> Compressed files are available in `/lib/themes/`.
+!> CSS 的压缩文件位于 `/lib/themes/`
 
 ```html
 <!-- compressed -->
@@ -18,18 +19,22 @@ There is a handful of themes available, both official and community-made. Copy [
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/buble.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/pure.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/dolphin.css">
 ```
 
-If you have any ideas or would like to develop a new theme, you are welcome to submit a [pull request](https://github.com/docsifyjs/docsify/pulls).
+如果你有其他想法或者想开发别的主题，欢迎提 [PR](https://github.com/docsifyjs/docsify/pulls)。
 
-#### Click to preview
+#### 点击切换主题
+
 
 <div class="demo-theme-preview">
   <a data-theme="vue">vue.css</a>
   <a data-theme="buble">buble.css</a>
   <a data-theme="dark">dark.css</a>
   <a data-theme="pure">pure.css</a>
+  <a data-theme="dolphin">dolphin.css</a>
 </div>
+
 
 <style>
   .demo-theme-preview a {
@@ -55,6 +60,7 @@ If you have any ideas or would like to develop a new theme, you are welcome to s
   };
 </script>
 
-## Other themes
 
-- [docsify-themeable](https://jhildenbiddle.github.io/docsify-themeable/#/) A delightfully simple theme system for docsify.
+## 其他主题
+
+- [docsify-themeable](https://jhildenbiddle.github.io/docsify-themeable/#/) 一个用于docsify的，简单到令人愉悦的主题系统.

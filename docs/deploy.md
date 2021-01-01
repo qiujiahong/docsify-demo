@@ -1,27 +1,26 @@
-# Deploy
+# 部署
 
-Similar to [GitBook](https://www.gitbook.com), you can deploy files to GitHub Pages, GitLab Pages or VPS.
+和 GitBook 生成的文档一样，我们可以直接把文档网站部署到 GitHub Pages 或者 VPS 上。
 
 ## GitHub Pages
 
-There're three places to populate your docs for your Github repository:
+GitHub Pages 支持从三个地方读取文件
 
-- `docs/` folder
-- master branch
-- gh-pages branch
+- `docs/` 目录
+- master 分支
+- gh-pages 分支
 
-It is recommended that you save your files to the `./docs` subfolder of the `master` branch of your repository. Then select `master branch /docs folder` as your Github Pages source in your repositories' settings page.
+我们推荐直接将文档放在 `docs/` 目录下，在设置页面开启 **GitHub Pages** 功能并选择 `master branch /docs folder` 选项。
 
-![github pages](_images/deploy-github-pages.png)
+![github pages](../_images/deploy-github-pages.png)
 
-!> You can also save files in the root directory and select `master branch`.
-You'll need to place a `.nojekyll` file in the deploy location (such as `/docs` or the gh-pages branch)
+!> 可以将文档放在根目录下，然后选择 **master 分支** 作为文档目录。你需要在部署位置下放一个 `.nojekyll` 文件（比如 `/docs` 目录或者 gh-pages 分支）
 
 ## GitLab Pages
 
-If you are deploying your master branch, include `.gitlab-ci.yml` with the following script:
+如果你正在部署你的主分支, 在 `.gitlab-ci.yml` 中包含以下脚本：
 
-?> The `.public` workaround is so `cp` doesn't also copy `public/` to itself in an infinite loop.
+?> `.public` 的解决方法是这样的，`cp` 不会无限循环的将 `public/` 复制到自身。
 
 ```YAML
 pages:
@@ -37,15 +36,19 @@ pages:
   - master
 ```
 
-!> You can replace script with `- cp -r docs/. public`, if `./docs` is your Docsify subfolder.
+!> 你可以用 `- cp -r docs/. public` 替换脚本, 如果 `./docs` 是你的 docsify 子文件夹。
 
-## Firebase Hosting
+## Gitee Pages
 
-!> You'll need to install the Firebase CLI using `npm i -g firebase-tools` after signing into the [Firebase Console](https://console.firebase.google.com) using a Google Account.
+在对应的 Gitee 仓库服务中选择 `Gitee Pages`，选择您要部署的分支，填写您要部署的分支上的目录，例如`docs`，填写完成之后点击启动即可。
 
-Using Terminal determine and navigate to the directory for your Firebase Project - this could be `~/Projects/Docs` etc. From there, run `firebase init`, choosing `Hosting` from the menu (use **space** to select, **arrow keys** to change options and **enter** to confirm). Follow the setup instructions.
+## Firebase 主机
 
-You should have your `firebase.json` file looking similar to this (I changed the deployment directory from `public` to `site`):
+!> 你需要先使用谷歌账号登陆 [Firebase 控制台](https://console.firebase.google.com) ，然后使用 `npm i -g firebase-tools` 命令安装 Firebase CLI 。
+
+使用命令行浏览到你的 Firebase 项目目录，大致是 `~/Projects/Docs` 等等。在这里执行 `firebase init` 命令，从菜单中选择 `Hosting` （使用 **空格键** 选择， **方向键** 切换选项， **回车键** 确认。遵照安装说明。
+
+然后你会有个 `firebase.json` 文件，内容大致如下（我把部署目录从 `public` 改为 `site` 了）：
 
 ```json
 {
@@ -56,11 +59,13 @@ You should have your `firebase.json` file looking similar to this (I changed the
 }
 ```
 
-Once finished, build the starting template by running `docsify init ./site` (replacing site with the deployment directory you determined when running `firebase init` - public by default). Add/edit the documentation, then run `firebase deploy` from the base project directory.
+完成后，执行 `docsify init ./site` 构建起始模板（将`site`替换为你在运行`firebase init`时确定的部署目录 - 默认情况下为`public`）。 添加/编辑文档，然后在项目根目录执行 `firebase deploy`。
 
 ## VPS
 
-Try following nginx config.
+和部署所有静态网站一样，只需将服务器的访问根目录设定为 `index.html` 文件。
+
+例如 nginx 的配置
 
 ```nginx
 server {
@@ -76,27 +81,27 @@ server {
 
 ## Netlify
 
-1.  Login to your [Netlify](https://www.netlify.com/) account.
-2.  In the [dashboard](https://app.netlify.com/) page, click **New site from Git**.
-3.  Choose a repository where you store your docs, leave the **Build Command** area blank, fill in the Publish directory area with the directory of your `index.html`, for example it should be docs if you populated it at `docs/index.html`.
+1.  登陆你的[Netlify](https://www.netlify.com/)账号
+2.  在[dashboard](https://app.netlify.com/)页上点击 **New site from Git**
+3.  选择那个你用来存储文档的git仓库，将 **Build Command** 留空, 将 **Publish directory** 区域填入你的`index.html`所在的目录，例如：填入`docs`(如果你的`index.html`的相对路径是`docs/index.html`的话)
 
-### HTML5 router
+### HTML5 路由
 
-When using the HTML5 router, you need to set up redirect rules that redirect all requests to your `index.html`, it's pretty simple when you're using Netlify, create a file named `_redirects` in the docs directory, add this snippet to the file and you're all set:
+当使用HTML5路由时，你需要设置一条将所有请求重定向到你的`index.html`的重定向规则。当你使用Netlify时这相当简单，在你的**Publish Directory**下创建一个`_redirects`文件，写进以下内容就可以了 :tada:
 
 ```sh
-/*    /index.html   200
+/* /index.html 200
 ```
 
 ## ZEIT Now
 
-1. Install [Now CLI](https://zeit.co/download), `npm i -g now`
-2. Change directory to your docsify website, for example `cd docs`
-3. Deploy with a single command, `now` 
+1. 安装 [Now CLI](https://zeit.co/download) ： `npm i -g now`
+2. 切换到你的 docsify 网站的文档目录，例如 `cd docs`
+3. 用一个指令来部署： `now`
 
 ## AWS Amplify
 
-1. Set the routerMode in the Docsify project `index.html` to *history* mode.
+1. 在 Docsify 项目的 `index.html` 中设置 routerMode 为 *history* 模式：
 
 ```html
 <script>
@@ -107,17 +112,17 @@ When using the HTML5 router, you need to set up redirect rules that redirect all
 </script>
 ```
 
-2. Login to your [AWS Console](https://aws.amazon.com).
-3. Go to the [AWS Amplify Dashboard](https://aws.amazon.com/amplify).
-4. Choose the **Deploy** route to setup your project.
-5. When prompted, keep the build settings empty if you're serving your docs within the root directory. If you're serving your docs from a different directory, customise your amplify.yml
+2. 登录到你的 [AWS 控制台](https://aws.amazon.com)。
+3. 到 [AWS Amplify 仪表盘](https://aws.amazon.com/amplify)。
+4. 选择 **Deploy** 路线来设置你的项目。
+5. 若有提示，如果你希望在项目根目录下保存你的文档，保持构建设置为空；如果你想保存文档到其它目录，修改`amplify.yml`:
 
 ```yml
 version: 0.1
 frontend:
   phases:
     build:
-      commands: 
+      commands:
         - echo "Nothing to build"
   artifacts:
     baseDirectory: /docs
@@ -125,59 +130,55 @@ frontend:
       - '**/*'
   cache:
     paths: []
-
 ```
 
-6. Add the following Redirect rules in their displayed order. Note that the second record is a PNG image where you can change it with any image format you are using. 
+6. 依次添加如下跳转规则。注意第二条的 PNG 是图片格式，如果你要使用其它图片格式，可以相应修改。
 
 | Source address | Target address | Type          |
 |----------------|----------------|---------------|
 | /<*>.md        | /<*>.md        | 200 (Rewrite) |
 | /<*>.png       | /<*>.png       | 200 (Rewrite) |
-| /<*>           | /index.html    | 200 (Rewrite) |        
-
+| /<*>           | /index.html    | 200 (Rewrite) |
 
 ## Docker
 
-- Create docsify files 
+- 创建 docsify 的文件
 
-  You need prepare the initial files instead of making in container.  
-  See the [Quickstart](https://docsify.js.org/#/quickstart) section for instructions on how to create these files manually or using [docsify-cli](https://github.com/docsifyjs/docsify-cli).
+你需要准备好初始文件，而不是在容器中制作。
+请参阅 [快速开始](https://docsify.js.org/#/zh-cn/quickstart) 部分，了解如何手动或使用 [docsify-cli](https://github.com/docsifyjs/docsify-cli) 创建这些文件。
 
-    ```sh
-    index.html
-    README.md
-    ```
+```sh
+index.html
+README.md
+```
 
-- Create dockerfile
+- 创建 Dockerfile
 
-  ```Dockerfile
-    FROM node:latest
-    LABEL description="A demo Dockerfile for build Docsify."
-    WORKDIR /docs
-    RUN npm install -g docsify-cli@latest
-    EXPOSE 3000/tcp
-    ENTRYPOINT docsify serve .
-  
-  ```
+```Dockerfile
+FROM node:latest
+LABEL description="A demo Dockerfile for build Docsify."
+WORKDIR /docs
+RUN npm install -g docsify-cli@latest
+EXPOSE 3000/tcp
+ENTRYPOINT docsify serve .
+```
 
-  So, current directory structure should be this: 
+创建成功后当前的目录结构应该是这样的：
 
-  ```sh
-   index.html
-   README.md
-   Dockerfile
-  ```
+```sh
+index.html
+README.md
+Dockerfile
+```
 
-- Build docker image
+- 构建 docker 镜像
 
-  ```sh
-  docker build -f Dockerfile -t docsify/demo .
-  ```
+```sh
+docker build -f Dockerfile -t docsify/demo .
+```
 
-- Run docker image
+- 运行 docker 镜像
 
-  ```sh
-  docker run -itp 3000:3000 --name=docsify -v $(pwd):/docs docsify/demo 
-  ```
-
+```sh
+docker run -itp 3000:3000 --name=docsify -v $(pwd):/docs docsify/demo
+```

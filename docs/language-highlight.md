@@ -1,20 +1,20 @@
-# Language highlighting
+# 代码高亮
 
-Docsify uses [Prism](https://prismjs.com) to highlight code blocks in your pages. Prism supports the following languages by default:
+**docsify**内置的代码高亮工具是 [Prism](https://github.com/PrismJS/prism)。Prism 默认支持的语言如下：
 
 * Markup - `markup`, `html`, `xml`, `svg`, `mathml`, `ssml`, `atom`, `rss`
 * CSS - `css`
 * C-like - `clike`
 * JavaScript - `javascript`, `js`
 
-Support for [additional languages](https://prismjs.com/#supported-languages) is available by loading the language-specific [grammar files](https://cdn.jsdelivr.net/npm/prismjs@1/components/) via CDN:
+[添加额外的语法支持](https://prismjs.com/#supported-languages)需要通过CDN添加相应的[语法文件](https://cdn.jsdelivr.net/npm/prismjs@1/components/) :
 
 ```html
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
 ```
 
-To enable syntax highlighting, wrap each code block in triple backticks with the [language](https://prismjs.com/#supported-languages) specified on the first line:
+要使用语法高亮，需要在代码块第一行添加对应的[语言声明](https://prismjs.com/#supported-languages)，示例如下:
 
 ````
 ```html
@@ -34,7 +34,7 @@ function getAdder(int $x): int
 ```
 ````
 
-The above markdown will be rendered as:
+上面代码的渲染结果:
 
 ```html
 <p>This is a paragraph</p>

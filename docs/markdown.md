@@ -1,6 +1,6 @@
-# Markdown configuration
+# Markdown 配置
 
-**docsify** uses [marked](https://github.com/markedjs/marked) as its Markdown parser. You can customize how it renders your Markdown content to HTML by customizing `renderer`:
+内置的 Markdown 解析器是 [marked](https://github.com/markedjs/marked)，可以修改它的配置。同时可以直接配置 `renderer`。
 
 ```js
 window.$docsify = {
@@ -15,9 +15,9 @@ window.$docsify = {
 }
 ```
 
-?> Configuration Options Reference [marked documentation](https://marked.js.org/#/USING_ADVANCED.md)
+?> 完整配置参数参考 [marked 文档](https://github.com/markedjs/marked#options-1)
 
-Even you can completely customize the parsing rules.
+当然也可以完全定制 Markdown 解析规则。
 
 ```js
 window.$docsify = {
@@ -29,7 +29,8 @@ window.$docsify = {
 }
 ```
 
-## Supports mermaid
+
+## 支持 mermaid
 
 ```js
 // Import mermaid

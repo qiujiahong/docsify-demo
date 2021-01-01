@@ -1,8 +1,8 @@
-# More pages
+# 多页文档
 
-If you need more pages, you can simply create more markdown files in your docsify directory. If you create a file named `guide.md`, then it is accessible via `/#/guide`.
+如果需要创建多个页面，或者需要多级路由的网站，在 docsify 里也能很容易的实现。例如创建一个 `guide.md` 文件，那么对应的路由就是 `/#/guide`。
 
-For example, the directory structure is as follows:
+假设你的目录结构如下：
 
 ```text
 .
@@ -14,20 +14,20 @@ For example, the directory structure is as follows:
         └── guide.md
 ```
 
-Matching routes
+那么对应的访问页面将是
 
 ```text
 docs/README.md        => http://domain.com
-docs/guide.md         => http://domain.com/#/guide
-docs/zh-cn/README.md  => http://domain.com/#/zh-cn/
-docs/zh-cn/guide.md   => http://domain.com/#/zh-cn/guide
+docs/guide.md         => http://domain.com/guide
+docs/zh-cn/README.md  => http://domain.com/zh-cn/
+docs/zh-cn/guide.md   => http://domain.com/zh-cn/guide
 ```
 
-## Sidebar
+## 定制侧边栏
 
-In order to have sidebar, then you can create your own `_sidebar.md` (see [this documentation's sidebar](https://github.com/docsifyjs/docsify/blob/master/docs/_sidebar.md) for an example):
+为了获得侧边栏，您需要创建自己的_sidebar.md，你也可以自定义加载的文件名。默认情况下侧边栏会通过 Markdown 文件自动生成，效果如当前的文档的侧边栏。
 
-First, you need to set `loadSidebar` to **true**. Details are available in the [configuration paragraph](configuration.md#loadsidebar).
+首先配置 `loadSidebar` 选项，具体配置规则见[配置项#loadSidebar](zh-cn/configuration.md#loadsidebar)。
 
 ```html
 <!-- index.html -->
@@ -40,36 +40,25 @@ First, you need to set `loadSidebar` to **true**. Details are available in the [
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 ```
 
-Create the `_sidebar.md`:
+接着创建 `_sidebar.md` 文件，内容如下
 
 ```markdown
 <!-- docs/_sidebar.md -->
 
-* [Home](/)
-* [Guide](guide.md)
+* [首页](zh-cn/)
+* [指南](zh-cn/guide)
 ```
 
-You need to create a `.nojekyll` in `./docs` to prevent GitHub Pages from ignoring files that begin with an underscore.
+需要在 `./docs` 目录创建 `.nojekyll` 命名的空文件，阻止 GitHub Pages 忽略命名是下划线开头的文件。
 
-!> Docsify only looks for `_sidebar.md` in the current folder, and uses that, otherwise it falls back to the one configured using `window.$docsify.loadSidebar` config.
+## 嵌套的侧边栏
 
-Example file structure:
+你可能想要浏览到一个目录时，只显示这个目录自己的侧边栏，这可以通过在每个文件夹中添加一个 `_sidebar.md` 文件来实现。
 
-```text
-└── docs/
-    ├── _sidebar.md
-    ├── index.md
-    ├── getting-started.md
-    └── running-services.md
-```
 
-## Nested Sidebars
+`_sidebar.md` 的加载逻辑是从每层目录下获取文件，如果当前目录不存在该文件则回退到上一级目录。例如当前路径为 `/zh-cn/more-pages` 则从 `/zh-cn/_sidebar.md` 获取文件，如果不存在则从 `/_sidebar.md` 获取。
 
-You may want the sidebar to update with only navigation to reflect the current directory. This can be done by adding a `_sidebar.md` file to each folder.
-
-`_sidebar.md` is loaded from each level directory. If the current directory doesn't have `_sidebar.md`, it will fall back to the parent directory. If, for example, the current path is `/guide/quick-start`, the `_sidebar.md` will be loaded from `/guide/_sidebar.md`.
-
-You can specify `alias` to avoid unnecessary fallback.
+当然你也可以配置 `alias` 避免不必要的回退过程。
 
 ```html
 <script>
@@ -82,11 +71,11 @@ You can specify `alias` to avoid unnecessary fallback.
 </script>
 ```
 
-!> You can create a `README.md` file in a subdirectory to use it as the landing page for the route.
+!> 你可以在一个子目录中创建一个 `README.md` 文件来作为路由的默认网页。
 
-## Set Page Titles from Sidebar Selection
+## 用侧边栏中选定的条目名称作为页面标题
 
-A page's `title` tag is generated from the _selected_ sidebar item name. For better SEO, you can customize the title by specifying a string after the filename.
+一个页面的 `title` 标签是由侧边栏中选中条目的名称所生成的。为了更好的 SEO ，你可以在文件名后面指定页面标题。
 
 ```markdown
 <!-- docs/_sidebar.md -->
@@ -94,11 +83,9 @@ A page's `title` tag is generated from the _selected_ sidebar item name. For bet
 * [Guide](guide.md "The greatest guide in the world")
 ```
 
-## Table of Contents
+## 显示目录
 
-Once you've created `_sidebar.md`, the sidebar content is automatically generated based on the headers in the markdown files.
-
-A custom sidebar can also automatically generate a table of contents by setting a `subMaxLevel`, compare [subMaxLevel configuration](configuration.md#submaxlevel).
+自定义侧边栏同时也可以开启目录功能。设置 `subMaxLevel` 配置项，具体介绍见 [配置项#sub-max-level](zh-cn/configuration#sub-max-level)。
 
 ```html
 <!-- index.html -->
@@ -112,26 +99,26 @@ A custom sidebar can also automatically generate a table of contents by setting 
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 ```
 
-## Ignoring Subheaders
+## 忽略副标题
 
-When `subMaxLevel` is set, each header is automatically added to the table of contents by default. If you want to ignore a specific header, add `<!-- {docsify-ignore} -->` to it.
+当设置了 `subMaxLevel` 时，默认情况下每个标题都会自动添加到目录中。如果你想忽略特定的标题，可以给它添加 `<!-- {docsify-ignore} -->` 。
 
 ```markdown
 # Getting Started
 
 ## Header <!-- {docsify-ignore} -->
 
-This header won't appear in the sidebar table of contents.
+该标题不会出现在侧边栏的目录中。
 ```
 
-To ignore all headers on a specific page, you can use `<!-- {docsify-ignore-all} -->` on the first header of the page.
+要忽略特定页面上的所有标题，你可以在页面的第一个标题上使用 `<!-- {docsify-ignore-all} -->` 。
 
 ```markdown
 # Getting Started <!-- {docsify-ignore-all} -->
 
 ## Header
 
-This header won't appear in the sidebar table of contents.
+该标题不会出现在侧边栏的目录中。
 ```
 
-Both `<!-- {docsify-ignore} -->` and `<!-- {docsify-ignore-all} -->` will not be rendered on the page when used.
+在使用时， `<!-- {docsify-ignore} -->` 和 `<!-- {docsify-ignore-all} -->` 都不会在页面上呈现。
