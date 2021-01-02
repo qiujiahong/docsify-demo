@@ -58,8 +58,11 @@
     <script>
       window.$docsify = {
         alias: {
+          ".*?/awesome":
+            "https://raw.githubusercontent.com/docsifyjs/awesome-docsify/master/README.md",
           "/.*/_navbar.md": "/_navbar.md",
           "/en/(.*)": "/en/$1",
+          "/_media/(.*)": "/_media/$1",
           "/zh-cn/(.*)": "/zh-cn/$1",
           "/(.*)": "zh-cn/$1",
         },
@@ -180,8 +183,8 @@
         ],
       };
     </script>
-    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4.6/lib/docsify.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4.6/lib/plugins/search.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-nginx.min.js"></script>
