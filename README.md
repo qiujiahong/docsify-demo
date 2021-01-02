@@ -24,3 +24,7 @@ docsify serve docs
 编辑 zh-cn 文件夹下的中文文档，或者是 en 下的中文文档
 
 ## docker 打包
+
+```bash
+sh docker/build.sh
+```
