@@ -6,6 +6,9 @@
 
 [视频文件](/_media/视频1.mp4 ":include :type=video width=100% height=400px controls")
 
+<!-- https://github.githubassets.com/images/icons/emoji/memo.png
+https://assets-cdn.github.com/images/icons/emoji/memo.png -->
+
 docsify 可以快速帮你生成文档网站。不同于 GitBook、Hexo 的地方是它不会生成静态的 `.html` 文件，所有转换工作都是在运行时。如果你想要开始使用它，只需要创建一个 `index.html` 就可以开始编写文档并直接[部署在 GitHub Pages](zh-cn/deploy.md)。
 
 查看[快速开始](zh-cn/quickstart.md)了解详情。
