@@ -23,6 +23,3 @@
   - [离线模式(PWA)](pwa.md)
   - [服务端渲染 (SSR)](ssr.md)
   - [文件嵌入](embed-files.md)
-
-<!-- * [Awesome docsify](awesome.md)
-* [Changelog](changelog.md) -->
