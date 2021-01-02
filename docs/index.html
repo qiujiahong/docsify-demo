@@ -54,12 +54,13 @@
   </head>
 
   <body>
-    <div id="app">Loading ...</div>
+    <div id="app">加载中 ...</div>
     <script>
       window.$docsify = {
         alias: {
           "/.*/_navbar.md": "/_navbar.md",
-          "/en/(.*)": "./en/$1",
+          "/en/(.*)": "/en/$1",
+          "/zh-cn/(.*)": "/zh-cn/$1",
           "/(.*)": "zh-cn/$1",
         },
         auto2top: true,
